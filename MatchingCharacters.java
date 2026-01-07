@@ -25,13 +25,16 @@ public class MatchingCharacters {
         for (Map.Entry<Character, int[]> entry : positions.entrySet()) {
             int[] pos = entry.getValue();
             System.out.println("pos[0]: "+pos[0] +"  pos[1]: "+pos[1]);
+            maxUniqueCount = Math.max(maxUniqueCount, pos[1]-1-pos[0]);
+            /*int[] pos = entry.getValue();
+            System.out.println("pos[0]: "+pos[0] +"  pos[1]: "+pos[1]);
             if (pos[0] != pos[1]) { // Ensure there is more than one occurrence
                 Set<Character> uniqueChars = new HashSet<>();
                 for (int i = pos[0] + 1; i < pos[1]; i++) {
                     uniqueChars.add(str.charAt(i));
                 }
                 maxUniqueCount = Math.max(maxUniqueCount, uniqueChars.size());
-            }
+            }*/
         }
 
         return maxUniqueCount;
@@ -39,7 +42,7 @@ public class MatchingCharacters {
 
     public static void main(String[] args) {
         // Test cases
-        System.out.println(MatchingCharacters("ahyjakh")); // Output should be 4
+        System.out.println(MatchingCharacters("ahyjakhbk")); // Output should be 4
         //System.out.println(MatchingCharacters("ghececgkaem")); // Output should be 5
         //System.out.println(MatchingCharacters("mmmerme")); // Output should be 3
        // System.out.println(MatchingCharacters("abccdefghi")); // Output should be 0

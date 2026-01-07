@@ -1,50 +1,46 @@
+import java.util.HashMap;
+import java.util.Map;
+
 public class RomanToInteger {
 
-        public static int value(char i)
-        {
-            if (i == 'I')
-            {
-                return 1;
-            }
-            if (i == 'V')
-            {
-                return 5;
-            }
-            if (i == 'X')
-            {
-                return 10;
-            }
-            if (i == 'L')
-            {
-                return 50;
-            }
-            if (i == 'C')
-            {
-                return 100;
-            }
-            if (i == 'D')
-            {
-                return 500;
-            }
-            if (i == 'M')
-            {
-                return 1000;
-            }
-            else return 0;
-        }
-    public static int romanToInt(String s) {
-        int result=0;
-        for (int i = 0; i < s.length(); i++)
-        {
-            result = result + value(s.charAt(i));
-        }
+    public int romanToInt(String s) {
+        // Map of Roman numerals to integers
+        Map<Character, Integer> romanMap = new HashMap<>();
+        romanMap.put('I', 1);
+        romanMap.put('V', 5);
+        romanMap.put('X', 10);
+        romanMap.put('L', 50);
+        romanMap.put('C', 100);
+        romanMap.put('D', 500);
+        romanMap.put('M', 1000);
 
-        return result;
+        int result = 0; // To store the final result
+        int n = s.length();
+
+        // Iterate through the string
+        for (int i = 0; i < n; i++) {
+            // Get the value of the current Roman numeral
+            int value = romanMap.get(s.charAt(i));
+
+            // Check if the current numeral is smaller than the next one
+            if (i < n - 1 && value < romanMap.get(s.charAt(i + 1))) {
+                result -= value; // Subtract the value
+            } else {
+                result += value; // Add the value
+            }
+        }
+        return result; // Return the final result
     }
 
 
+
     public static void main(String[] args) {
-            System.out.println(romanToInt("MCMXCIV"));
+
+        RomanToInteger solution = new RomanToInteger();
+
+        System.out.println(solution.romanToInt("XLII")); // 42
+        System.out.println(solution.romanToInt("CXCIV")); // 194
+        System.out.println(solution.romanToInt("MMMCDXLIV")); // 3444
 
     }
     }
